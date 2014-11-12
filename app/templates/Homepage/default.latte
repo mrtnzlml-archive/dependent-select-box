@@ -1,0 +1,54 @@
+{block content}
+
+	{form form}
+		{input one, size => 3}
+		{snippet two}
+			{input two, size => 3}
+		{/snippet}
+		{snippet three}
+			{input three, size => 3}
+		{/snippet}
+		{input send}
+	{/form}
+
+	<style>
+		html.wait, html.wait * { cursor: wait !important; }
+	</style>
+
+	<script>
+		$(function(){
+
+			$.nette.ext('spinner', {
+				start: function () {
+					$('html').addClass('wait');
+				},
+				complete: function () {
+					$('html').removeClass('wait');
+				}
+			});
+
+			$.nette.init();
+
+			$('body').on('change', 'select[name=one]', function () {
+			    $.nette.ajax({
+			        url: {link invalidateTwo!},
+			        data: {
+			            'value': $('select[name=one]').val(),
+			        }
+			    });
+			});
+
+			$('body').on('change', 'select[name=two]', function () {
+			    $.nette.ajax({
+			        url: {link invalidateThree!},
+			        data: {
+			            'valueOne': $('select[name=one]').val(),
+			            'valueTwo': $('select[name=two]').val(),
+			        }
+			    });
+			});
+
+		});
+	</script>
+
+{/block}
