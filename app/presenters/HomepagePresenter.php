@@ -2,9 +2,8 @@
 
 namespace App\Presenters;
 
-use Nette,
-	App\Model,
-	Nette\Application\UI;
+use Nette;
+use Nette\Application\UI;
 
 class HomepagePresenter extends BasePresenter {
 
@@ -40,12 +39,9 @@ class HomepagePresenter extends BasePresenter {
 	}
 
 	protected function createComponentForm($name) {
-		$form = new UI\Form;
-		$this[$name] = $form;
+		$form = new UI\Form($this, $name);
 
 		$form->addSelect('one', 'One', $this->databaseOne)->setDefaultValue(1);
-		//dump($form['one']->value);
-
 		$form->addSelect('two', 'Two', $this->databaseTwo[$form['one']->value])->setDefaultValue(1);
 		$form->addSelect('three', 'Three', $this->databaseThree[$form['two']->value][1])->setDefaultValue(1);
 
