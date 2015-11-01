@@ -5,7 +5,7 @@ namespace App\Presenters;
 use Nette;
 use Nette\Application\UI;
 
-class HomepagePresenter extends BasePresenter {
+class HomepagePresenter extends UI\Presenter {
 
 	private $databaseOne = ['1', '2', '3'];
 
