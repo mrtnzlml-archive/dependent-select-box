@@ -46,12 +46,15 @@ class HomepagePresenter extends BasePresenter {
 		$form->addSelect('three', 'Three', $this->databaseThree[$form['two']->value][1])->setDefaultValue(1);
 
 		$form->addSubmit('send', 'Odeslat');
-		$form->onSuccess[] = $this->success;
+		$form->onSuccess[] = function($_, $vals) {
+			dump($vals); //selected possitions
+			dump([ //selected values
+				$this->databaseOne[$vals['one']],
+				$this->databaseTwo[$vals['one']][$vals['two']],
+				$this->databaseThree[$vals['one']][$vals['two']][$vals['three']],
+			]);
+		};
 		return $form;
-	}
-
-	public function success(UI\Form $form, $vals) {
-		dump($vals);
 	}
 
 	public function handleInvalidateTwo($value) {
