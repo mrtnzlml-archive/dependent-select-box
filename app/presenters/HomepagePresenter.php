@@ -43,7 +43,7 @@ class HomepagePresenter extends UI\Presenter {
 
 		$form->addSelect('one', 'One', $this->databaseOne)->setDefaultValue(1);
 		$form->addSelect('two', 'Two', $this->databaseTwo[$form['one']->value])->setDefaultValue(1);
-		$form->addSelect('three', 'Three', $this->databaseThree[$form['two']->value][1])->setDefaultValue(1);
+		$form->addSelect('three', 'Three', $this->databaseThree[$form['one']->value][$form['two']->value])->setDefaultValue(1);
 
 		$form->addSubmit('send', 'Odeslat');
 		$form->onSuccess[] = function($_, $vals) {
