@@ -1,12 +1,18 @@
 {block content}
 
 	{form form}
-		{input one, size => 3}
+		{input one, size => 5}
 		{snippet two}
-			{input two, size => 3}
+			{input two, size => 5}
 		{/snippet}
 		{snippet three}
-			{input three, size => 3}
+			{input three, size => 5}
+		{/snippet}
+		{snippet four}
+			{input four, size => 5}
+		{/snippet}
+		{snippet five}
+			{input five, size => 5}
 		{/snippet}
 		{input send}
 	{/form}
@@ -46,6 +52,29 @@
 			            'valueTwo': $('select[name=two]').val(),
 			        }
 			    });
+			});
+
+			$('body').on('change', 'select[name=three]', function () {
+				$.nette.ajax({
+					url: {link invalidateFour!},
+					data: {
+						'valueOne': $('select[name=one]').val(),
+						'valueTwo': $('select[name=two]').val(),
+						'valueThree': $('select[name=three]').val(),
+					}
+				});
+			});
+
+			$('body').on('change', 'select[name=four]', function () {
+				$.nette.ajax({
+					url: {link invalidateFive!},
+					data: {
+						'valueOne': $('select[name=one]').val(),
+						'valueTwo': $('select[name=two]').val(),
+						'valueThree': $('select[name=three]').val(),
+						'valueFour': $('select[name=four]').val(),
+					}
+				});
 			});
 
 		});
