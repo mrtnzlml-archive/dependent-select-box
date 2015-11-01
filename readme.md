@@ -1,1 +1,1 @@
-see http://www.zeminem.cz/dependent-select-box
+see http://zlml.cz/dependent-select-box
